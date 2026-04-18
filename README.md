@@ -1,6 +1,6 @@
-# 🏥 ICU Patient Vitals Anomaly Detection
+#  ICU Patient Vitals Anomaly Detection
 
-## 📋 Problem Statement
+##  Problem Statement
 
 Build a machine learning model that identifies abnormal patterns in **real-time vital sign monitoring data** from surgical ICU patients. Given time-series vital signs data, predict an **anomaly_score (0 → 1)** for each timestamp, where:
 - **0** = Normal vital sign pattern
@@ -10,7 +10,7 @@ Higher scores indicate more abnormal patterns. The model will be evaluated on ho
 
 ---
 
-## 📊 Project Overview
+## Project Overview
 
 This solution implements a **multi-model ensemble approach** combining:
 - Clinical domain knowledge (ICU medical thresholds)
@@ -30,7 +30,7 @@ This solution implements a **multi-model ensemble approach** combining:
 
 ---
 
-## 🩺 Vital Signs Features
+##  Vital Signs Features
 
 | Signal | Column | Unit | Normal Range | Critical Range |
 |--------|--------|------|--------------|-----------------|
@@ -41,7 +41,7 @@ This solution implements a **multi-model ensemble approach** combining:
 
 ---
 
-## 📥 Getting Started: Download Dataset
+##  Getting Started: Download Dataset
 
 ### Option 1: Kaggle Competition (Recommended)
 If this is a Kaggle competition dataset, download directly from the competition page:
@@ -61,7 +61,7 @@ For reference data:
 - **VitalDB**: [https://github.com/MIT-LCP/mimic-code](https://github.com/MIT-LCP/mimic-code)
 - **MIMIC-III**: [https://mimic.physionet.org/](https://mimic.physionet.org/)
 
-### 📍 Project Directory Structure
+###  Project Directory Structure
 ```
 anomaly detection/
 ├── Anomaly detection.ipynb  ← Main analysis notebook
@@ -73,7 +73,7 @@ anomaly detection/
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Prepare Data
 ```
@@ -97,7 +97,7 @@ Upload submissions.csv to the competition or evaluation platform
 
 ---
 
-## 🔍 How Anomalies Are Detected
+##  How Anomalies Are Detected
 
 The model uses **5 independent detection methods** combined with weighted voting:
 
@@ -148,10 +148,10 @@ For each vital sign (HR, MBP, SpO2, Temp):
 ```
 
 **Data Preprocessing**:
-- ✅ Forward-fill missing values within patient timelines
-- ✅ Fallback to patient median, then global median
-- ✅ Robust scaling (resistant to outliers)
-- ✅ Clip extreme values to [-5, +5] to prevent model corruption
+-  Forward-fill missing values within patient timelines
+-  Fallback to patient median, then global median
+-  Robust scaling (resistant to outliers)
+-  Clip extreme values to [-5, +5] to prevent model corruption
 
 **Why per-patient features matter**:
 - Patient baseline variation is huge (young vs. elderly, healthy vs. critical)
@@ -160,7 +160,7 @@ For each vital sign (HR, MBP, SpO2, Temp):
 
 ---
 
-## 📊 Calibration & Output Format
+##  Calibration & Output Format
 
 The model outputs **anomaly scores** normalized to [0, 1] range:
 
@@ -183,13 +183,13 @@ case_id,time_sec,anomaly_score
 | 0.7 - 1.0 | Critical Anomaly | Alert clinician immediately |
 
 **Output Processing**:
-1. ✅ Min-Max Normalization → [0, 1] range
-2. ✅ Percentile Stretching → Better score separation
-3. ✅ Round to 6 decimals → Numerical precision
+1.  Min-Max Normalization → [0, 1] range
+2.  Percentile Stretching → Better score separation
+3.  Round to 6 decimals → Numerical precision
 
 ---
 
-## 🧵 Pipeline Workflow
+##  Pipeline Workflow
 
 | Step | What Happens | Output |
 |------|--------------|--------|
@@ -206,9 +206,9 @@ case_id,time_sec,anomaly_score
 
 ---
 
-## 💡 Why This Approach Works
+## Why This Approach Works
 
-### ✅ Strengths
+###  Strengths
 
 | Feature | Benefit |
 |---------|---------|
@@ -218,7 +218,7 @@ case_id,time_sec,anomaly_score
 | **Automated Feature Engineering** | Captures temporal patterns (trends, changes, deviations) |
 | **Robust Scaling** | Handles sensor noise and occasional spikes |
 
-### ⚠️ Challenges Handled
+###  Challenges Handled
 
 | Issue | Solution |
 |-------|----------|
@@ -230,7 +230,7 @@ case_id,time_sec,anomaly_score
 
 ---
 
-## 📁 Project Files
+##  Project Files
 
 ```
 anomaly detection/
@@ -243,7 +243,7 @@ anomaly detection/
 
 ---
 
-## 🔧 Technical Stack
+##  Technical Stack
 
 | Component | Library | Purpose |
 |-----------|---------|---------|
@@ -256,7 +256,7 @@ anomaly detection/
 
 ---
 
-## 🎯 Expected Results
+##  Expected Results
 
 - **Score Range**: [0.0 (normal), 1.0 (critical anomaly)]
 - **Typical Distribution**: Most readings 0.1-0.4 (normal), occasional spikes 0.7+
@@ -264,7 +264,7 @@ anomaly detection/
 
 ---
 
-## ❓ FAQ
+##  FAQ
 
 **Q: What if data is missing?**
 A: Forward-fill strategy fills gaps per patient, then uses median fallback.
@@ -277,7 +277,7 @@ A: Typically 5-15 minutes for 500K rows on standard machine with n_jobs=-1 (para
 
 ---
 
-## 📝 Future Enhancements
+##  Future Enhancements
 
 - [ ] Add LSTM for temporal sequence modeling
 - [ ] Incorporate patient metadata (age, diagnosis)
